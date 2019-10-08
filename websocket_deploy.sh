@@ -1,10 +1,25 @@
 #!/bin/bash
+
+if [ -z $1 ];then
+   echo "websocket_deploy.sh PK06_bestboxDB_backend_websocket_20190927_1127.tar.gz"
+	exit 1
+fi
+
 echo $(dirname $(readlink -f $0))
 cd $(dirname $(readlink -f $0))
 
-cp -a backend_websocket oldbackend_websocket
-tar -xzf PK06_bestboxDB_backend_websocket_20190927_1127.tar.gz
-cd backend_websocket/
+if [ -d "oldbackend_internet_websocket" ];then
+	rm -rf oldbackend_internet_websocket
+fi
+
+mv backend_internet_websocket oldbackend_internet_websocket
+if [ -d "backend_websocket" ];then
+   rm -rf backend_websocket
+fi
+
+tar -xzf $1
+mv backend_websocket backend_internet_websocket
+cd ./backend_internet_websocket
 
 if [ -d "storage" ];then
 	rm -rf storage
@@ -16,19 +31,19 @@ fi
 
 rm -rf ./.env
 
-if [ -d "../oldbackend_websocket/storage" ];then
-	mv ../oldbackend_websocket/storage  ./ ;
+if [ -d "../oldbackend_internet_websocket/storage" ];then
+	cp -a ../oldbackend_internet_websocket/storage  ./ ;
 else
 	mkdir storage;
 fi
 
-if [ -d "../oldbackend_websocket/runtime" ];then
-	mv ../oldbackend_websocket/runtime ./ ;
+if [ -d "../oldbackend_internet_websocket/runtime" ];then
+	cp -a ../oldbackend_internet_websocket/runtime ./ ;
 else
 	mkdir runtime;
 fi
 
-mv ../oldbackend_websocket/.env ./.env
+mv ../oldbackend_internet_websocket/.env ./.env
 
 chown www-data:www-data -R ./
 chmod -R 755 storage

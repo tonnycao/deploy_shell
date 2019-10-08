@@ -1,4 +1,8 @@
 #!/bin/bash
+if [ -z $1 ];then
+   echo "video_deploy.sh PK06_bestboxDB_backend_video_20190927_1637.tar.gz"
+	exit 1
+fi
 
 echo $(dirname $(readlink -f $0))
 cd $(dirname $(readlink -f $0))
@@ -23,10 +27,10 @@ if [ -d "storage" ];then
   rm -rf ./storage;
 fi
 
-mv ../oldbackend_video/config  ./
+cp -a ../oldbackend_video/config  ./
 
 if [ -d "../oldbackend_video/storage" ];then
-   mv ../oldbackend_video/storage ./
+   cp -a ../oldbackend_video/storage ./
 else
    mkdir storage
 fi
