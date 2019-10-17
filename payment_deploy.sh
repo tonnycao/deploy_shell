@@ -31,3 +31,4 @@ fi
 cp -a ../oldbackend_payment/config  ./
 chown www-data:www-data -R ./
 chmod -R 750 config
+mv ../oldbackend_payment ${HOME}

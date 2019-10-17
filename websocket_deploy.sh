@@ -43,8 +43,10 @@ else
 	mkdir runtime;
 fi
 
-mv ../oldbackend_internet_websocket/.env ./.env
-
+if [ -d "../oldbackend_internet_websocket/.env" ];then
+  mv ../oldbackend_internet_websocket/.env ./.env
+fi
 chown www-data:www-data -R ./
 chmod -R 755 storage
 chmod -R 755 runtime
+mv ../oldbackend_internet_websocket ${HOME}

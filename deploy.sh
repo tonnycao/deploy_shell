@@ -21,6 +21,7 @@ rm -rf ./storage
 fi
 
 cp -p ../oldbackend_internet/.env  ./
+cp -p ../oldbackend_internet/config/constants.php ./config/
 
 if [ -d "../oldbackend_internet/storage" ];then
     cp -a ../oldbackend_internet/storage  ./
@@ -35,3 +36,4 @@ rm -rf   ./public/storage
 chown www-data:www-data -R ./
 chmod -R 755 storage
 
+mv ../oldbackend_internet ${HOME}/

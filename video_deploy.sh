@@ -12,12 +12,8 @@ if [ -d "oldbackend_video" ];then
 fi
 
 cp -a backend_video oldbackend_video
-tar -xzf PK06_bestboxDB_backend_video_20190927_1637.tar.gz
+tar -xzf $1
 cd backend_video/
-
-if [ -d "App" ];then
-mv App app;
-fi
 
 if [ -d "config" ];then
   rm -rf ./config;
@@ -38,3 +34,4 @@ fi
 chown www-data:www-data -R ./
 chmod -R 755 config
 chmod -R 755 storage
+mv ../oldbackend_video ${HOME}
