@@ -8,13 +8,15 @@ fi
 echo $(dirname $(readlink -f $0))
 cd $(dirname $(readlink -f $0))
 
-if [ -d "oldbackend_payment" ];then
-rm -rf oldbackend_payment;
+if [ -d "oldweixin_payment" ];then
+rm -rf oldweixin_payment;
 fi
 
-cp -a backend_payment oldbackend_payment
+cp -a weixin_payment oldbackend_payment
 tar -xzf $1
-cd backend_payment/
+
+mv backend_payment weixin_payment
+cd weixin_payment/
 
 if [ -d "config" ];then
 rm -rf config;
@@ -28,7 +30,12 @@ if [ -d "doc" ];then
 rm -rf doc;
 fi
 
-cp -a ../oldbackend_payment/config  ./
+cp -a ../oldweixin_payment/config  ./
 chown www-data:www-data -R ./
 chmod -R 750 config
-mv ../oldbackend_payment ${HOME}
+
+if [ -d "${HOME}/oldweixin_payment" ];then
+rm -rf ${HOME}/oldweixin_payment
+fi
+
+mv ../oldweixin_payment ${HOME}

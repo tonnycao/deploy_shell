@@ -36,4 +36,8 @@ rm -rf   ./public/storage
 chown www-data:www-data -R ./
 chmod -R 755 storage
 
+if [ -d "${HOME}/oldbackend_internet" ];then
+rm -rf ${HOME}/oldbackend_internet
+fi
+
 mv ../oldbackend_internet ${HOME}/

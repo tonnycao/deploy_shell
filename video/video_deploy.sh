@@ -34,4 +34,9 @@ fi
 chown www-data:www-data -R ./
 chmod -R 755 config
 chmod -R 755 storage
+
+if [ -d "${HOME}/oldbackend_video" ];then
+rm -rf ${HOME}/oldbackend_video
+fi
+
 mv ../oldbackend_video ${HOME}

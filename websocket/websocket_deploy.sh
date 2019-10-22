@@ -46,7 +46,12 @@ fi
 if [ -d "../oldbackend_internet_websocket/.env" ];then
   mv ../oldbackend_internet_websocket/.env ./.env
 fi
+
 chown www-data:www-data -R ./
 chmod -R 755 storage
 chmod -R 755 runtime
+
+if [ -d "${HOME}/oldbackend_internet_websocket" ];then
+rm -rf ${HOME}/oldbackend_internet_websocket
+fi
 mv ../oldbackend_internet_websocket ${HOME}
